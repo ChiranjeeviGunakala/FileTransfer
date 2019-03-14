@@ -1,0 +1,166 @@
+spring:
+  application:
+    name: SCWM-AE-HK-FTP-FILETRANSFER      
+server:
+  port: 8080  
+eureka:
+  client:
+    enabled: false  
+file:
+  backup:
+    location: C:\\JavaTest\\SPS\\CE07_India\\   
+ftp:
+  source:
+    server: ukftp-auto.oup.com
+    port: 21
+    username: fharbinger
+    password: farafara
+    pickup:
+      location: /SCWM/AE/in/
+  destination:
+    server: HKHKOAPP10.hk.oup.com
+    port: 21
+    username: oup.com\a-pothugaa
+    password: P@ssw0rd2!
+    drop:
+      location: /in/KN/ 
+    cleanup:
+      location: /in/KN/BackUp            
+management:
+  security:
+    enabled: false
+  metrics:
+    export:
+      prometheus: 
+        enabled: true
+    distribution:
+      percentiles[http.server.requests]: 0.95, 0.99
+      percentiles-histogram[http.server.requests]: true
+      sla[http.server.requests]: 10ms, 100ms
+---
+spring:
+  profiles: dev
+file:
+  backup:
+    location: /OUT/SCWM/AE/${spring.application.name}/dev
+ftp:
+  source:
+    server: ukftp-auto.oup.com
+    port: 21
+    username: fharbinger
+    password: farafara
+    pickup:
+      location: /SCWM/AE/in/
+  destination:
+    server: HKHKOAPP09.hk.oup.com
+    port: 21
+    username: oup.com\a-pothugaa
+    password: P@ssw0rd2!
+    drop:
+      location: /in/KN/ 
+    cleanup:
+      location: /in/KN/BackUp           
+eureka:
+  client:
+    enabled: true
+    service-url:  
+      defaultZone: http://dev-oupeureka:8761/eureka/
+  instance:
+    prefer-ip-address: true   
+
+management:
+  security:
+    enabled: false
+  metrics:
+    export:
+      prometheus: 
+        enabled: true
+    distribution:
+      percentiles[http.server.requests]: 0.95, 0.99
+      percentiles-histogram[http.server.requests]: true
+      sla[http.server.requests]: 10ms, 100ms
+---
+spring:
+  profiles: uat
+file:
+  backup:
+    location: /OUT/SCWM/AE/${spring.application.name}/uat
+ftp:
+  source:
+    server: ukftp-auto.oup.com
+    port: 21
+    username: fharbinger
+    password: farafara
+    pickup:
+      location: /SCWM/AE/in/
+  destination:
+    server: HKHKOAPP10.hk.oup.com
+    port: 21
+    username: oup.com\integrationsapftp
+    password: xD%40S%23Q9b
+    drop:
+      location: /in/KN/ 
+    cleanup:
+      location: /in/KN/BackUp           
+eureka:
+  client:
+    enabled: true
+    service-url:  
+      defaultZone: http://uat-oupeureka:8761/eureka/
+  instance:
+    prefer-ip-address: true 
+
+management:
+  security:
+    enabled: false
+  metrics:
+    export:
+      prometheus: 
+        enabled: true
+    distribution:
+      percentiles[http.server.requests]: 0.95, 0.99
+      percentiles-histogram[http.server.requests]: true
+      sla[http.server.requests]: 10ms, 100ms
+      
+---
+spring:
+  profiles: prod
+file:
+  backup:
+    location: /OUT/SCWM/AE/${spring.application.name}/prod
+ftp:
+  source:
+    server: ukftp-auto.oup.com
+    port: 21
+    username: harbinger
+    password: k12aA%2519
+    pickup:
+      location: /SCWM/AE/in/
+  destination:
+    server: HKHKOAPP12.hk.oup.com
+    port: 21
+    username: oup.com\integrationsapftp
+    password: xD%40S%23Q9b
+    drop:
+      location: /in/KN/ 
+    cleanup:
+      location: /in/KN/BackUp           
+eureka:
+  client:
+    enabled: true
+    service-url:  
+      defaultZone: http://prod-oupeureka:8761/eureka/
+  instance:
+    prefer-ip-address: true 
+
+management:
+  security:
+    enabled: false
+  metrics:
+    export:
+      prometheus: 
+        enabled: true
+    distribution:
+      percentiles[http.server.requests]: 0.95, 0.99
+      percentiles-histogram[http.server.requests]: true
+      sla[http.server.requests]: 10ms, 100ms
